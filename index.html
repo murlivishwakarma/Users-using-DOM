@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+ 
+    #main {
+       width: 100%;
+       height: 100vh;
+      background-color:#313131;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+    }
+  #box {
+       width: 800px;
+       height:max-content;
+       background-color:azure;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+    }
+
+    .container{
+     width: max-content;
+     min-height:17rem;
+     background-color: #fff;
+     border: 1px solid black;
+     box-shadow: 0px 0px 50px grey;
+     margin: 1rem;
+     margin-left: 1rem;
+     border-radius: 1rem;
+   }
+
+    #box1{
+     display: flex;
+     justify-content: space-between;
+   }
+
+   .container p{
+    margin-left:2rem;
+    margin-top: 0rem;
+    font-size: x-large;
+    font-weight: bolder;
+   }
+
+   .part2{
+     margin: 1rem;
+     margin-left:.3rem ;
+    width: 100%;
+    height: fit-content;
+    padding: 1rem;
+   }
+
+   .part2 p{
+    position: relative;
+    font-size: large;
+     font-weight: lighter;
+     margin-left: 0rem;
+     display:inline;
+   }
+
+   .container .part2 #age{
+    margin-top:4rem;
+   }
+    img{
+      width: 100px;
+      height: 100px;
+      border: none ;
+      outline: none;
+      box-shadow: 0px 0px 10px black; 
+      border-radius: 50%;
+      object-fit: contain;
+      margin: 1rem;
+      margin-bottom: 0rem;
+      cursor: pointer;
+    }
+
+    button{
+      height: fit-content;
+      width: 7rem;
+       margin: 0rem;
+      margin-left:7rem;
+      font-size:medium;
+      font-weight: bolder;
+      padding: .8rem;
+      border-radius:5rem;
+      color: #fff;
+      background-color:black;
+    }
+    </style>
+</head>
+<body>
+
+   <div id="main">
+     <div id="box">
+      <button>Get Users</button>
+     </div>
+   </div>
+
+</body>
+
+    <script>
+
+       
+       function getuser2(){
+    
+    fetch('https://dummyjson.com/users')
+   .then((response)=> response.json())
+   .then((data)=> {
+    const info = data.users;
+                 const pic = info[0].image;
+                 const username = info[0].username;
+                 const fname = info[0].firstName;
+                 const lname = info[0].lastName;
+                 const age = info[0].age;
+                 const div = document.getElementById("box")
+                 div.innerHTML=`
+
+               <div class='container'>
+
+                  <div id='box1'>
+
+                   <div class='part1'>
+                    <img src="${pic}">
+                    <p>${username}</p>
+                  </div>
+
+    <div class='part2'>
+       <p class='p1'>Fname - ${fname}</p> <br><br>
+       <p>Lname - ${lname}</p><br><br>
+       <p id ='age'> Age - ${age}</p>
+    </div>
+
+     </div>
+        <button>Get Users</button>
+     </div>
+
+      <div>
+       `
+     })
+       
+   .catch((error)=> console.log(error+"2"));
+ 
+  }  
+  getuser2();   
+
+         function getuser(i,data) {
+
+                 const info = data.users;
+                 const pic = info[i].image;
+                 const username = info[i].username;
+                 const fname = info[i].firstName;
+                 const lname = info[i].lastName;
+                 const age = info[i].age;
+                 const div = document.getElementById("box")
+                 div.innerHTML=`
+
+               <div class='container'>
+
+                  <div id='box1'>
+
+                   <div class='part1'>
+                    <img src="${pic}">
+                    <p>${username}</p>
+                  </div>
+
+    <div class='part2'>
+       <p class='p1'>Fname - ${fname}</p> <br><br>
+       <p>Lname - ${lname}</p><br><br>
+       <p id ='age'> Age - ${age}</p>
+    </div>
+
+     </div>
+        <button>Get Users</button>
+     </div>
+
+      <div>
+       `
+       getuser1();
+}
+var i=0;
+function getuser1(){
+    
+   fetch('https://dummyjson.com/users')
+  .then((response)=> response.json())
+  .then((data)=> {
+    const btn = document.querySelector("button");
+    btn.addEventListener('click',()=>{
+      i=i+1;
+      console.log(i);
+      getuser(i,data);
+    }); 
+  })
+  .catch((error)=> console.log(error+"2"));
+ }  
+  getuser1(); 
+    </script>
+</html>
